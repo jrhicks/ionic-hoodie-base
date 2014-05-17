@@ -50,7 +50,7 @@ gulp.task('watch', function() {
     gulp.watch(paths.html, ['html']);
 });
 
-gulp.task('default', ['watch', 'server']);
+gulp.task('default', ['watch', 'sass', 'server']);
 
 gulp.task('server', function() {
     server.run();
