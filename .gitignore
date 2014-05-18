@@ -1,4 +1,6 @@
 node_modules/
 .ideas
-www/lib
+www/
+app/lib/
+app/scss/build/
 
