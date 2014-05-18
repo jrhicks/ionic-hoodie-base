@@ -10,7 +10,8 @@ var gulp = require('gulp'),
     gutil = require('gulp-util'),
     clean = require('gulp-clean'),
     filesize = require('gulp-filesize'),
-    uglify = require('gulp-uglify');
+    uglify = require('gulp-uglify'),
+    minifyHTML = require('gulp-minify-html');
 
 
 
@@ -93,10 +94,10 @@ gulp.task('app_build', function(done) {
         .on('end', done)
 })
 
-
 gulp.task('www_build', function(done) {
     //  Compile scss and inject css and js into index.html
     var states_html = gulp.src(paths.states_html, {base: './app/states'})
+        .pipe(minifyHTML())
         .pipe(gulp.dest('./www/states'));
     var fonts = gulp.src(paths.fonts)
         .pipe(gulp.dest('./www/fonts'))
@@ -120,6 +121,9 @@ gulp.task('www_build', function(done) {
         .pipe(gulp.dest("./www/js"))
     var states_js = gulp.src(paths.states_js)
         .pipe(concat("states.js"))
+        .pipe(filesize())
+        .pipe(uglify())
+        .pipe(filesize())
         .pipe(gulp.dest("./www/js"))
     var lib_js = gulp.src(paths.lib)
         .pipe(concat("lib.js"))

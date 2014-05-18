@@ -23,6 +23,7 @@
     "gulp-plumber": "^0.6.1",
     "gulp-clean": "^0.2.4",
     "gulp-filesize": "0.0.6",
-    "gulp-uglify": "^0.3.0"
+    "gulp-uglify": "^0.3.0",
+    "gulp-minify-html": "^0.1.3"
   }
 }
