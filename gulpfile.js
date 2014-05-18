@@ -3,17 +3,21 @@ var gulp = require('gulp'),
     sass = require('gulp-sass'),
     minifyCss = require('gulp-minify-css'),
     rename = require('gulp-rename'),
-    es = require('event-stream');
-    inject = require("gulp-inject");
-    debug = require('gulp-debug');
+    es = require('event-stream'),
+    inject = require("gulp-inject"),
+    debug = require('gulp-debug'),
+    plumber = require('gulp-plumber'),
+    gutil = require('gulp-util');
 
 var app_server = require('./tasks/app_server.js'),
     www_server = require('./tasks/www_server.js');
 
-var after_build = function() {
-    app_server.reload();
-    www_server.reload();
-};
+var beep_on_error = {
+   errorHandler: function (err) {
+       gutil.beep();
+       console.log(err);
+   }
+}
 
 var paths = {
     index: ['./app/index.html'],
@@ -44,6 +48,15 @@ gulp.task('www_serve', function() {
     www_server.run();
 });
 
+
+gulp.task('scss', function(done) {
+    gulp.src(paths.scss)
+        .pipe(plumber(beep_on_error))
+        .pipe(sass())
+        .pipe(plumber.stop())
+        .pipe(gulp.dest('./app/css'));
+});
+
 gulp.task('app_build', function(done) {
     //  Compile scss and inject css and js into index.html
     var states_html = gulp.src(paths.states_html, {base: './app/states'})
@@ -54,9 +67,6 @@ gulp.task('app_build', function(done) {
     var states_js = gulp.src(paths.states_js, { base: './app/states' })
     var lib_js = gulp.src(paths.lib);
     var css = gulp.src(paths.css);
-    var scss = gulp.src(paths.scss)
-        .pipe(sass())
-        .pipe(gulp.dest('./app/css'));
     gulp.src('./app/index.html')
         .pipe(inject(lib_js,
             {
@@ -83,7 +93,6 @@ gulp.task('www_build', function(done) {
         .pipe(concat("app.css"))
         .pipe(minifyCss())
         .pipe(gulp.dest("./www/css"))
-
     var app_js = gulp.src(paths.app_js)
         .pipe(concat("app.js"))
         .pipe(gulp.dest("./www/js"))
@@ -113,10 +122,11 @@ gulp.task('www_build', function(done) {
 });
 
 gulp.task('watch', function() {
-    gulp.watch('./app/**/**',['app_build'])
+    gulp.watch('./app/**/**',['app_build']);
+    gulp.watch('./app/scss/**/**', ['scss']);
 });
 
 
-gulp.task('default', ['watch', 'serve', 'app_build']);
+gulp.task('default', ['scss', 'watch', 'serve', 'app_build']);
 
 
