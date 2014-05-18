@@ -7,7 +7,8 @@ var gulp = require('gulp'),
     inject = require("gulp-inject"),
     debug = require('gulp-debug'),
     plumber = require('gulp-plumber'),
-    gutil = require('gulp-util');
+    gutil = require('gulp-util'),
+    clean = require('gulp-clean');
 
 var app_server = require('./tasks/app_server.js'),
     www_server = require('./tasks/www_server.js');
@@ -39,6 +40,12 @@ var paths = {
         './app/lib/hoodie/dist/hoodie.js'
     ]
 };
+
+
+gulp.task('clean', function () {
+    return gulp.src('www', {read: false})
+        .pipe(clean());
+});
 
 gulp.task('serve', function() {
     app_server.run();

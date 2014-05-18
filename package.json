@@ -20,6 +20,7 @@
     "tiny-lr": "0.0.7",
     "gulp-inject": "^0.4.1",
     "gulp-debug": "^0.3.0",
-    "gulp-plumber": "^0.6.1"
+    "gulp-plumber": "^0.6.1",
+    "gulp-clean": "^0.2.4"
   }
 }
