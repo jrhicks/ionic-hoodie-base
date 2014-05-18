@@ -11,9 +11,8 @@ var gulp = require('gulp'),
     clean = require('gulp-clean'),
     filesize = require('gulp-filesize'),
     uglify = require('gulp-uglify'),
-    minifyHTML = require('gulp-minify-html');
-
-
+    minifyHTML = require('gulp-minify-html'),
+    watch = require('gulp-watch');
 
 var app_server = require('./tasks/app_server.js'),
     www_server = require('./tasks/www_server.js');
@@ -71,7 +70,6 @@ gulp.task('scss', function(done) {
 
 gulp.task('app_build', function(done) {
     //  Compile scss and inject css and js into index.html
-    var states_html = gulp.src(paths.states_html, {base: './app/states'})
     var fonts = gulp.src(paths.fonts)
         .pipe(gulp.dest('./app/fonts'))
     var app_js = gulp.src(paths.app_js)
@@ -148,8 +146,8 @@ gulp.task('www_build', function(done) {
 });
 
 gulp.task('watch', function() {
-    gulp.watch('./app/**/**',['app_build']);
-    gulp.watch('./app/scss/**/**', ['scss']);
+    watch({glob: './app/**/*.*'},['app_build']);
+    watch({glob: './scss/**/*.*'},['app_build']);
 });
 
 
