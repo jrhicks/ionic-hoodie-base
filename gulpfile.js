@@ -13,7 +13,8 @@ var gulp = require('gulp'),
     uglify = require('gulp-uglify'),
     minifyHTML = require('gulp-minify-html'),
     watch = require('gulp-watch'),
-    ngmin = require('gulp-ngmin');
+    ngmin = require('gulp-ngmin'),
+    wiredep = require('wiredep');
 
 /**
  * Configure paths
@@ -25,19 +26,10 @@ var paths = {
     components_js: ['./app/components/**/*.js'],
     states_js: ['./app/states/**/*.js'],
     scss: ['./scss/**/*.scss'],
-    css: ['./app/css/**/*.css'],
+    css: ['./app/css/**/*.css'] + wiredep().css,
     states_html: ['./app/states/**/*.html'],
     fonts: ['./bower_components/ionic/release/fonts/*.*'],
-    lib: [
-        './bower_components/angular/angular.js',
-        './bower_components/angular-ui-router/release/angular-ui-router.js',
-        './bower_components/angular-animate/angular-animate.js',
-        './bower_components/angular-sanitize/angular-sanitize.js',
-        './bower_components/ionic/release/js/ionic.js',
-        './bower_components/ionic/release/js/ionic-angular.js',
-        './bower_components/jquery/jquery.js',
-        './bower_components/hoodie/dist/hoodie.js'
-    ]
+    lib: wiredep().js
 };
 
 /**
