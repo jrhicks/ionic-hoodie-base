@@ -12,17 +12,12 @@ var gulp = require('gulp'),
     filesize = require('gulp-filesize'),
     uglify = require('gulp-uglify'),
     minifyHTML = require('gulp-minify-html'),
-    watch = require('gulp-watch');
+    watch = require('gulp-watch'),
+    ngmin = require('gulp-ngmin');
 
-var app_server = require('./tasks/app_server.js'),
-    www_server = require('./tasks/www_server.js');
-
-var beep_on_error = {
-   errorHandler: function (err) {
-       gutil.beep();
-       console.log(err);
-   }
-}
+/**
+ * Configure paths
+ */
 
 var paths = {
     index: ['./app/index.html'],
@@ -32,35 +27,47 @@ var paths = {
     scss: ['./scss/**/*.scss'],
     css: ['./app/css/**/*.css'],
     states_html: ['./app/states/**/*.html'],
-    fonts: ['./app/lib/ionic/release/fonts/*.*'],
+    fonts: ['./bower_components/ionic/release/fonts/*.*'],
     lib: [
-        './app/lib/angular/angular.js',
-        './app/lib/angular-ui-router/release/angular-ui-router.js',
-        './app/lib/angular-animate/angular-animate.js',
-        './app/lib/angular-sanitize/angular-sanitize.js',
-        './app/lib/ionic/release/js/ionic.js',
-        './app/lib/ionic/release/js/ionic-angular.js',
-        './app/lib/jquery/jquery.js',
-        './app/lib/hoodie/dist/hoodie.js'
+        './bower_components/angular/angular.js',
+        './bower_components/angular-ui-router/release/angular-ui-router.js',
+        './bower_components/angular-animate/angular-animate.js',
+        './bower_components/angular-sanitize/angular-sanitize.js',
+        './bower_components/ionic/release/js/ionic.js',
+        './bower_components/ionic/release/js/ionic-angular.js',
+        './bower_components/jquery/jquery.js',
+        './bower_components/hoodie/dist/hoodie.js'
     ]
 };
 
+/**
+ * Configure error handling
+ */
 
-gulp.task('clean', function () {
-    return gulp.src('www', {read: false})
-        .pipe(clean());
-});
+var beep_on_error = {
+    errorHandler: function (err) {
+        gutil.beep();
+        console.log(err);
+    }
+}
 
-gulp.task('serve', function() {
+
+/**
+ * Default tasks load bower components into app/lib
+ * compiles external scss into app/css, injects
+ * references into index.html and starts server on
+ * port 9000
+ */
+
+var app_server = require('./tasks/app_server.js');
+
+gulp.task('default', ['app_scss', 'app_watch', 'app_serve', 'app_build']);
+
+gulp.task('app_serve', function() {
     app_server.run();
 });
 
-gulp.task('www_serve', function() {
-    www_server.run();
-});
-
-
-gulp.task('scss', function(done) {
+gulp.task('app_scss', function(done) {
     gulp.src(paths.scss)
         .pipe(plumber(beep_on_error))
         .pipe(sass())
@@ -75,7 +82,8 @@ gulp.task('app_build', function(done) {
     var app_js = gulp.src(paths.app_js)
     var components_js = gulp.src(paths.components_js, {base: './app/compoonents'})
     var states_js = gulp.src(paths.states_js, { base: './app/states' })
-    var lib_js = gulp.src(paths.lib);
+    var lib_js = gulp.src(paths.lib)
+        .pipe(gulp.dest('./app/lib'));
     var css = gulp.src(paths.css);
     gulp.src('./app/index.html')
         .pipe(inject(lib_js,
@@ -91,6 +99,25 @@ gulp.task('app_build', function(done) {
         .pipe(app_server.reload())
         .on('end', done)
 })
+
+gulp.task('app_watch', function() {
+    watch({glob: './app/**/*.*'},['app_build']);
+    watch({glob: './scss/**/*.*'},['app_build']);
+});
+
+/**
+ * www related tasks concat and minify into the www folder
+ * and launches a server on port 9080
+ */
+
+var www_server = require('./tasks/www_server.js');
+
+gulp.task('www', ['app_scss','www_watch','www_serve','www_build']);
+
+gulp.task('www_clean', function () {
+    return gulp.src('www', {read: false})
+        .pipe(clean());
+});
 
 gulp.task('www_build', function(done) {
     //  Compile scss and inject css and js into index.html
@@ -108,18 +135,21 @@ gulp.task('www_build', function(done) {
     var app_js = gulp.src(paths.app_js)
         .pipe(concat("app.js"))
         .pipe(filesize())
+        .pipe(ngmin())
         .pipe(uglify())
         .pipe(filesize())
         .pipe(gulp.dest("./www/js"))
     var components_js = gulp.src(paths.components_js)
         .pipe(concat("components.js"))
         .pipe(filesize())
+        .pipe(ngmin())
         .pipe(uglify())
         .pipe(filesize())
         .pipe(gulp.dest("./www/js"))
     var states_js = gulp.src(paths.states_js)
         .pipe(concat("states.js"))
         .pipe(filesize())
+        .pipe(ngmin())
         .pipe(uglify())
         .pipe(filesize())
         .pipe(gulp.dest("./www/js"))
@@ -140,17 +170,21 @@ gulp.task('www_build', function(done) {
             {
                 ignorePath: '/www'
             }))
+        .pipe(minifyHTML())
         .pipe(gulp.dest('./www'))
         .pipe(www_server.reload())
         .on('end', done)
 });
 
-gulp.task('watch', function() {
-    watch({glob: './app/**/*.*'},['app_build']);
-    watch({glob: './scss/**/*.*'},['app_build']);
+gulp.task('www_serve', function() {
+    www_server.run();
+});
+
+gulp.task('www_watch', function() {
+    watch({glob: './app/**/*.*'},['www_build']);
+    watch({glob: './scss/**/*.*'},['www_build']);
 });
 
 
-gulp.task('default', ['scss', 'watch', 'serve', 'app_build']);
 
 
