@@ -8,7 +8,11 @@ var gulp = require('gulp'),
     debug = require('gulp-debug'),
     plumber = require('gulp-plumber'),
     gutil = require('gulp-util'),
-    clean = require('gulp-clean');
+    clean = require('gulp-clean'),
+    filesize = require('gulp-filesize'),
+    uglify = require('gulp-uglify');
+
+
 
 var app_server = require('./tasks/app_server.js'),
     www_server = require('./tasks/www_server.js');
@@ -98,19 +102,30 @@ gulp.task('www_build', function(done) {
         .pipe(gulp.dest('./www/fonts'))
     var css = gulp.src(paths.css)
         .pipe(concat("app.css"))
+        .pipe(filesize())
         .pipe(minifyCss())
+        .pipe(filesize())
         .pipe(gulp.dest("./www/css"))
     var app_js = gulp.src(paths.app_js)
         .pipe(concat("app.js"))
+        .pipe(filesize())
+        .pipe(uglify())
+        .pipe(filesize())
         .pipe(gulp.dest("./www/js"))
     var components_js = gulp.src(paths.components_js)
         .pipe(concat("components.js"))
+        .pipe(filesize())
+        .pipe(uglify())
+        .pipe(filesize())
         .pipe(gulp.dest("./www/js"))
     var states_js = gulp.src(paths.states_js)
         .pipe(concat("states.js"))
         .pipe(gulp.dest("./www/js"))
     var lib_js = gulp.src(paths.lib)
         .pipe(concat("lib.js"))
+        .pipe(filesize())
+        .pipe(uglify())
+        .pipe(filesize())
         .pipe(gulp.dest("./www/js"))
 
     gulp.src('./app/index.html')
