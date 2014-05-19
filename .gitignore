@@ -3,4 +3,5 @@ node_modules/
 www/
 app/lib/
 app/scss/build/
+hoodie_vm/.vagrant
 
