@@ -14,7 +14,9 @@ var gulp = require('gulp'),
     minifyHTML = require('gulp-minify-html'),
     watch = require('gulp-watch'),
     ngmin = require('gulp-ngmin'),
-    wiredep = require('wiredep');
+    wiredep = require('wiredep'),
+    shell = require('gulp-shell'),
+    open = require('open');
 
 /**
  * Configure paths
@@ -26,7 +28,7 @@ var paths = {
     components_js: ['./app/components/**/*.js'],
     states_js: ['./app/states/**/*.js'],
     scss: ['./scss/**/*.scss'],
-    css: ['./app/css/**/*.css'] + wiredep().css,
+    css: ['./app/css/**/*.css'],
     states_html: ['./app/states/**/*.html'],
     fonts: ['./bower_components/ionic/release/fonts/*.*'],
     lib: wiredep().js
@@ -177,6 +179,16 @@ gulp.task('www_watch', function() {
     watch({glob: './scss/**/*.*'},['www_build']);
 });
 
+/**
+ * hoodie boots up the vagrant vm and starts hoodie
+ * relax opens couch's web client
+ */
 
+gulp.task('hoodie', shell.task(
+    ['vagrant up'],
+    {cwd: './hoodie_vm'}
+));
 
-
+gulp.task('relax', function(){
+    open("http://localhost:6003/_utils")
+});
