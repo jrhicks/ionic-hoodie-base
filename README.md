@@ -1,4 +1,6 @@
-Ionic Hood.ie Base
+Ionic Hoodie Base
 =====================
 
-A (incomplete) starter project for Ionic that ships with hood.ie proxies and a hood.ie VagrantFile.
+A Ionic setup with gulp tasks to take a reasonable organized angular app
+in the app folder, link in bower components, and run a server that forwards
+api calls to a hood.ie vagrant machine.
