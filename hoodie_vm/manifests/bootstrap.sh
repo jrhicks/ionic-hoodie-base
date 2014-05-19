@@ -7,7 +7,6 @@ hoodie new hoodie_app
 cd /home/vagrant/hoodie_app
 npm install
 
-# Install bower components
 chown -R vagrant /home/vagrant/hoodie_app
 export HOODIE_BIND_ADDRESS=0.0.0.0
 

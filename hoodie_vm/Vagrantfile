@@ -24,6 +24,9 @@ Vagrant.configure("2") do |config|
     end
 
     hoodie_vagrant.vm.provision :shell, :path => "manifests/bootstrap.sh"
+    hoodie_vagrant.vm.provision :shell, :path => "manifests/start_hoodie.sh", :run => "always"
+
+
 
   end
 
