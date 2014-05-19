@@ -1,0 +1,27 @@
+<ion-view title="Sign In">
+    <ion-content class="has-header">
+
+        <ion-list>
+            <label class="item item-input">
+                <span class="input-label">Server</span>
+                <input type="text" ng-model="account.server">
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Username</span>
+                <input type="text" ng-model="account.username">
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Password</span>
+                <input type="text" ng-model="account.password">
+            </label>
+
+            <label class="item item-input">
+                <span class="input-label"></span>
+                <button class="button" ng-click="saveUser()">Sign In</button>
+            </label>
+
+        </ion-list>
+
+    </ion-content>
+</ion-view>
+

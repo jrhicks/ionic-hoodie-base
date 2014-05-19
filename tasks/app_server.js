@@ -24,7 +24,8 @@
         return server.on("listening", function() {
             var serverAddress;
             serverAddress = server.address();
-            url = "http://localhost" + ":" + serverAddress.port;
+            // localhost broke some stuff
+            url = "http://127.0.0.1" + ":" + serverAddress.port;
             return open(url);
         });
     };

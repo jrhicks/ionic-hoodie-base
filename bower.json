@@ -1,8 +1,8 @@
 {
   "name": "ionic-project",
   "dependencies": {
-    "ionic": "1.0.0-beta.4",
+    "ionic": "~0.9.27",
     "hoodie": "~0.8.2",
-    "jquery": "~1.10.2"
+    "jquery": "~2.1.1"
   }
 }
