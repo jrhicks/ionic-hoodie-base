@@ -6,7 +6,7 @@
 angular.module('app', ['ionic',
                        'ui.router',
                        'app.settings_ctrl',
-                       'angularLocalStorage'
+                       'ngStorage'
     ])
 
     .run(function($ionicPlatform) {
@@ -25,5 +25,5 @@ angular.module('app', ['ionic',
     })
 
     .config(function ($urlRouterProvider) {
-        $urlRouterProvider.otherwise('settings/show');
+        $urlRouterProvider.otherwise('settings/edit');
     });

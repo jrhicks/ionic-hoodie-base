@@ -17,13 +17,28 @@ angular.module('app.settings_ctrl', [])
 
     })
 
-    .controller('SettingsShowCtrl', function ($scope, $stateParams, $ionicNavBarDelegate, angularLocalStorage) {
-        $scope.settings = {server: 'http://localhost:9000'};
-        $scope.editSettings = function() {
-            alert("hello")
-        };
-    })
+    .controller('settingsEditCtrl', function ($scope, $stateParams, $localStorage) {
+        $scope.$settings = $localStorage;
 
-    .controller('settingsEditCtrl', function ($scope, $stateParams) {
-        $scope.settings = {server: 'http://localhost:9000'};
+        $scope.signOut = function(settings) {
+            var hoodie = new Hoodie();
+            hoodie.account.signOut().done(function(){
+                alert("Signed Out");
+            });
+        };
+
+        $scope.login = function(settings) {
+            var hoodie = new Hoodie();
+            hoodie.account.signIn(settings.username, settings.password).done(function(){
+                alert("hello");
+            });
+        };
+        $scope.signUp = function(settings)  {
+            alert(settings.username);
+            alert(settings.password);
+            var hoodie = new Hoodie();
+            hoodie.account.signUp(settings.username, settings.password).done(function(){
+                alert("hello");
+            });
+        }
     });
