@@ -25,7 +25,7 @@
             var serverAddress;
             serverAddress = server.address();
             // localhost broke some stuff
-            url = "http://127.0.0.1" + ":" + serverAddress.port;
+            url = "http://localhost" + ":" + serverAddress.port;
             return open(url);
         });
     };

@@ -1,7 +1,18 @@
-<ion-view title="Sign In">
+<ion-view title="Settings">
+
     <ion-content class="has-header">
 
-        <ion-list>
+        <ion-nav-buttons side="right">
+            <button class="button" ng-click="doSomething()">
+                Save
+            </button>
+        </ion-nav-buttons>
+
+        <div class="list">
+            <div class="item item-divider item-icon-left">
+                <i class="icon ion-person"></i>
+                Account
+            </div>
             <label class="item item-input">
                 <span class="input-label">Server</span>
                 <input type="text" ng-model="account.server">
@@ -14,14 +25,7 @@
                 <span class="input-label">Password</span>
                 <input type="text" ng-model="account.password">
             </label>
-
-            <label class="item item-input">
-                <span class="input-label"></span>
-                <button class="button" ng-click="saveUser()">Sign In</button>
-            </label>
-
-        </ion-list>
-
+        </div>
     </ion-content>
 </ion-view>
 

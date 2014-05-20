@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 angular.module('app', ['ionic',
                        'ui.router',
-                       'app.account_ctrl'
+                       'app.settings_ctrl'
                       ])
 
     .run(function($ionicPlatform) {
@@ -24,5 +24,5 @@ angular.module('app', ['ionic',
     })
 
     .config(function ($urlRouterProvider) {
-        $urlRouterProvider.otherwise('account/show');
+        $urlRouterProvider.otherwise('settings/show');
     });

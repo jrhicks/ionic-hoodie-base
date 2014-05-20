@@ -1,0 +1,29 @@
+<ion-view title="Settings">
+
+    <ion-content class="has-header">
+
+        <ion-nav-buttons side="right">
+            <a class="button" href="#/settings/edit">Edit</a>
+        </ion-nav-buttons>
+
+        <div class="list">
+            <div class="item item-divider item-icon-left">
+                <i class="icon ion-person"></i>
+                Account
+            </div>
+            <label class="item item-input">
+                <span class="input-label">Server</span>
+                {{settings.server}}
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Username</span>
+                {{settings.username}}
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Password</span>
+                {{settings.password}}
+            </label>
+
+        </div>
+    </ion-content>
+</ion-view>
