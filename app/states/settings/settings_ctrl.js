@@ -17,7 +17,7 @@ angular.module('app.settings_ctrl', [])
 
     })
 
-    .controller('SettingsShowCtrl', function ($scope, $stateParams, $ionicNavBarDelegate) {
+    .controller('SettingsShowCtrl', function ($scope, $stateParams, $ionicNavBarDelegate, angularLocalStorage) {
         $scope.settings = {server: 'http://localhost:9000'};
         $scope.editSettings = function() {
             alert("hello")
@@ -27,5 +27,3 @@ angular.module('app.settings_ctrl', [])
     .controller('settingsEditCtrl', function ($scope, $stateParams) {
         $scope.settings = {server: 'http://localhost:9000'};
     });
-
-

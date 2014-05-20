@@ -72,10 +72,10 @@ gulp.task('app_scss', function(done) {
 gulp.task('app_build', function(done) {
     //  Compile scss and inject css and js into index.html
     var fonts = gulp.src(paths.fonts)
-        .pipe(gulp.dest('./app/fonts'))
-    var app_js = gulp.src(paths.app_js)
-    var components_js = gulp.src(paths.components_js, {base: './app/compoonents'})
-    var states_js = gulp.src(paths.states_js, { base: './app/states' })
+        .pipe(gulp.dest('./app/fonts'));
+//    var app_js = gulp.src(paths.app_js);
+    var components_js = gulp.src(paths.components_js, {base: './app/compoonents'});
+    var states_js = gulp.src(paths.states_js, { base: './app/states' });
     var lib_js = gulp.src(paths.lib)
         .pipe(gulp.dest('./app/lib'));
     var css = gulp.src(paths.css);
@@ -85,7 +85,7 @@ gulp.task('app_build', function(done) {
                 starttag: '<!-- inject:lib:{{ext}} -->',
                 ignorePath: '/app'
             }))
-        .pipe(inject(es.merge(app_js, states_js, components_js, css),
+        .pipe(inject(es.merge( states_js, components_js, css),
             {
                 ignorePath: '/app'
             }))
