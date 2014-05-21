@@ -4,7 +4,7 @@
     "angular": "~1.2.12",
     "ionic": "v1.0.0-beta.5b",
     "hoodie": "~0.8.2",
-    "jquery": "~2.1.1",
+    "jquery-ajax-only":"1.10.2",
     "ngstorage": "~0.3.0",
     "hoodie-plugin-angularjs":"https://github.com/jrhicks/hoodie-plugin-angularjs.git#v0.0.11.5"
   }
