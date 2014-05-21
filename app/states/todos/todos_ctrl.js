@@ -4,10 +4,14 @@ angular.module('app.todos_ctrl', [])
     .config(function ($stateProvider) {
         // Collection States
         $stateProvider
-            .state('todos', {
+            .state('welcome.todos', {
                 url: '/todos/index',
-                controller: 'TodosIndexCtrl',
-                templateUrl: 'states/todos/index.html'
+                views: {
+                    'todos-tab': {
+                        templateUrl: 'states/todos/index.html',
+                        controller: 'TodosIndexCtrl'
+                    }
+                }
             })
     })
 

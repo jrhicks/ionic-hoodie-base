@@ -4,15 +4,19 @@ angular.module('app.settings_ctrl', [])
     .config(function ($stateProvider) {
         // Collection States
         $stateProvider
-            .state('settings_edit', {
+            .state('welcome.settings', {
                 url: '/settings/edit',
-                controller: 'settingsEditCtrl',
-                templateUrl: 'states/settings/edit.html'
+                views: {
+                    'settings-tab': {
+                        templateUrl: 'states/settings/edit.html',
+                        controller: 'SettingsEditCtrl'
+                    }
+                }
             })
 
     })
 
-    .controller('settingsEditCtrl', function ($scope, $stateParams, $localStorage) {
+    .controller('SettingsEditCtrl', function ($scope, $stateParams, $localStorage) {
         $scope.$settings = $localStorage;
 
         $scope.signOut = function(settings) {

@@ -6,12 +6,13 @@
 angular.module('app', ['ionic',
                        'hoodie',
                        'ui.router',
+                       'app.welcome_ctrl',
                        'app.todos_ctrl',
                        'app.settings_ctrl',
                        'ngStorage'
     ])
 
-    .run(function($ionicPlatform) {
+    .run(function($ionicPlatform, $localStorage) {
       $ionicPlatform.ready(function() {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
@@ -24,12 +25,32 @@ angular.module('app', ['ionic',
           StatusBar.styleDefault();
         }
       })
+
     })
 
+
     .config(function(hoodieProvider) {
+        var deviceType = (navigator.userAgent.match(/iPad/i))  == "iPad" ? "iPad" : (navigator.userAgent.match(/iPhone/i))  == "iPhone" ? "iPhone" : (navigator.userAgent.match(/Android/i)) == "Android" ? "Android" : (navigator.userAgent.match(/BlackBerry/i)) == "BlackBerry" ? "BlackBerry" : "Web";
+        var host=""
+
+        switch(deviceType) {
+            case "iPad":
+                host = "http://localhost:9000"
+                break;
+            case "iPhone":
+                host = "http://localhost:9000"
+                break;
+            case "Android":
+                // Access host machine from Genymotion using  on network vboxnet0
+                // Run ifconfig vboxnet0 or on Windows ipconfig to determine
+                host = "http://191.168.228.1:9000"
+                break;
+            default:
+                host = "http://localhost:9000"
+        }
         hoodieProvider.url('http://localhost:9000');
     })
 
     .config(function ($urlRouterProvider) {
-        $urlRouterProvider.otherwise('todos/index');
+        $urlRouterProvider.otherwise('/welcome/todos/index');
     });
