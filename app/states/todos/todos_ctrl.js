@@ -11,9 +11,9 @@ angular.module('app.todos_ctrl', [])
             })
     })
 
-    .controller('TodosIndexCtrl', function ($scope, $stateParams, hoodieArray) {
+    .controller('TodosIndexCtrl', function ($scope, $stateParams, $localStorage, hoodieArray) {
         $scope.form = {};
-
+        $scope.settings = $localStorage;
         $scope.add = function (form) {
             $scope.todos.push({
                 title: form.title
