@@ -4,11 +4,6 @@ angular.module('app.settings_ctrl', [])
     .config(function ($stateProvider) {
         // Collection States
         $stateProvider
-            .state('settings_show', {
-                url: '/settings/show',
-                controller: 'SettingsShowCtrl',
-                templateUrl: 'states/settings/show.html'
-            })
             .state('settings_edit', {
                 url: '/settings/edit',
                 controller: 'settingsEditCtrl',

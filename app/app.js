@@ -4,7 +4,9 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 angular.module('app', ['ionic',
+                       'hoodie',
                        'ui.router',
+                       'app.todos_ctrl',
                        'app.settings_ctrl',
                        'ngStorage'
     ])
@@ -24,6 +26,10 @@ angular.module('app', ['ionic',
       })
     })
 
+    .config(function(hoodieProvider) {
+        hoodieProvider.url('http://localhost:9000');
+    })
+
     .config(function ($urlRouterProvider) {
-        $urlRouterProvider.otherwise('settings/edit');
+        $urlRouterProvider.otherwise('todos/index');
     });
