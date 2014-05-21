@@ -8,10 +8,6 @@
                 Connection Settings
             </div>
             <label class="item item-input">
-                <span class="input-label">Server</span>
-                <input type="text" ng-model="$settings.server">
-            </label>
-            <label class="item item-input">
                 <span class="input-label">Username</span>
                 <input type="text" ng-model="$settings.username">
             </label>
@@ -19,24 +15,10 @@
                 <span class="input-label">Password</span>
                 <input type="password" ng-model="$settings.password">
             </label>
-            <label class="item item-input">
-                <span class="input-label">Account</span>
-                {{$settings.account}}
-            </label>
 
             <label class="item">
                 <button class="button button-block button-stable" ng-click="login($settings)">
                     Login
-                </button>
-            </label>
-            <label class="item">
-                <button class="button button-block button-stable" ng-click="signUp($settings)">
-                    Sign Up
-                </button>
-            </label>
-            <label class="item">
-                <button class="button button-block button-stable" ng-click="signOut($settings)">
-                    SignOut
                 </button>
             </label>
 

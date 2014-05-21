@@ -16,28 +16,24 @@ angular.module('app.settings_ctrl', [])
 
     })
 
-    .controller('SettingsEditCtrl', function ($scope, $stateParams, $localStorage) {
-        $scope.$settings = $localStorage;
+    .controller('SettingsEditCtrl', function ($scope, $stateParams, $localStorage, hoodieAccount) {
+        if(hoodieAccount.username != null)
+        {
+            $scope.$settings = $localStorage;
+            $scope.account = hoodieAccount.username;
+        }
 
         $scope.signOut = function(settings) {
-            var hoodie = new Hoodie();
-            hoodie.account.signOut().done(function(){
+            hoodieAccount.signOut().done(function(){
                 alert("Signed Out");
             });
         };
 
         $scope.login = function(settings) {
-            var hoodie = new Hoodie();
-            hoodie.account.signIn(settings.username, settings.password).done(function(){
-                alert("hello");
-            });
+            hoodieAccount.signIn(settings.username, settings.password);
         };
+
         $scope.signUp = function(settings)  {
-            alert(settings.username);
-            alert(settings.password);
-            var hoodie = new Hoodie();
-            hoodie.account.signUp(settings.username, settings.password).done(function(){
-                alert("hello");
-            });
+            hoodieAccount.signUp(settings.username, settings.password);
         }
     });

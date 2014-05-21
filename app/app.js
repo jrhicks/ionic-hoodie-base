@@ -9,6 +9,7 @@ angular.module('app', ['ionic',
                        'app.welcome_ctrl',
                        'app.todos_ctrl',
                        'app.settings_ctrl',
+                       'app.plugin_console_ctrl',
                        'ngStorage'
     ])
 
