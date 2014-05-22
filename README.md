@@ -1,6 +1,21 @@
 Ionic Hoodie Base
 =====================
 
-A Ionic setup with gulp tasks to take a reasonable organized angular app
-in the app folder, link in bower components, and run a server that forwards
-api calls to a hood.ie vagrant machine.
+A base app for building Ionic and Hoodie apps.
+
+Offline First
+--------
+
+* git clone https://github.com/jrhicks/ionic-hoodie-base.git
+
+* cd ionic-hoodie-base
+
+* gulp
+
+Add Hoodie VM
+----
+
+* gulp hoodie
+
+
+
