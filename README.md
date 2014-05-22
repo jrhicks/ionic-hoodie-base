@@ -3,7 +3,7 @@ Ionic Hoodie Base
 
 A base app for building Ionic and Hoodie apps.
 
-![alt text](https://raw.githubusercontent.com/jrhicks/ionic-hoodie-base/master/demo_preview.png "Screencast Preview")
+[![alt text](https://raw.githubusercontent.com/jrhicks/ionic-hoodie-base/master/demo_preview.png "Screencast Preview")](http://screencast.com/t/AXgtK446qx)
 
 Offline First
 --------
