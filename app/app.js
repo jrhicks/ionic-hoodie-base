@@ -8,7 +8,7 @@ angular.module('app', ['ionic',
                        'ui.router',
                        'app.welcome_ctrl',
                        'app.todos_ctrl',
-                       'app.settings_ctrl',
+                       'app.account_ctrl',
                        'app.plugin_console_ctrl',
                        'ngStorage'
     ])
@@ -49,7 +49,7 @@ angular.module('app', ['ionic',
             default:
                 host = "http://localhost:9000"
         }
-        hoodieProvider.url('http://localhost:9000');
+        hoodieProvider.url(host);
     })
 
     .config(function ($urlRouterProvider) {

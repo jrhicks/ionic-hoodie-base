@@ -3,16 +3,23 @@
     <ion-content class="has-header">
 
         <div class="card">
-            <h3>Hoodie Plugin AngularJS</h3>
-            <p>Open console and run commands to experiment with services provided by <a href="https://github.com/elmarburke/hoodie-plugin-angularjs">hoodie-plugin-angularjs</a>.</p>
-        <pre>
-injector = angular.element(document.body).injector();
+            <div class="item item-divider">
+                Hoodie Plugin AngularJS
+            </div>
+            <div class="item item-text-wrap">
+                Open console and run commands to experiment with services provided by <a href="https://github.com/elmarburke/hoodie-plugin-angularjs">hoodie-plugin-angularjs</a>.
+            </div>
 
-hAccount = injector.get('hoodieAccount');
-hStore = injector.get('hoodieAccount');
-hArray = injector.get('hoodieArray');
-        </pre>
+            <div class="item item-text-wrap">
+<pre style="font-size: 70%;">
+i = angular.element(document.body).injector();
+
+hAccount = i.get('hoodieAccount');
+hStore = i.get('hoodieAccount');
+hArray = i.get('hoodieArray');
+</pre>
         </div>
+
     </ion-content>
 </ion-view>
 
