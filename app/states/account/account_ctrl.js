@@ -59,13 +59,9 @@ angular.module('app.account_ctrl', [])
                     }
                 )
             };
-
-        $scope.signUp = function(settings)  {
-            hoodieAccount.signUp(settings.username, settings.password);
-        }
     })
 
-    .controller('AccountSignupCtrl', function ($scope, $ionicNavBarDelegate, hoodieAccount) {
+    .controller('AccountSignupCtrl', function ($scope, $ionicNavBarDelegate, $ionicLoading, hoodieAccount, toaster) {
 
         $scope.form = {};
 
@@ -74,12 +70,19 @@ angular.module('app.account_ctrl', [])
         };
 
         $scope.signUp = function(form) {
-            console.log("signUp Button pushed");
-            hoodieAccount.signOut();
-            hoodieAccount.signUp(form.username, form.password).then( function() {
-                console.log("signUp");
-                $ionicNavBarDelegate.back();
-            } )
+            $ionicLoading.show({template: 'Signing Up <i class="ion-loading-c" />'});
+            hoodieAccount.signUp(form.username, form.password)
+                .then(
+                function() {
+                    $ionicLoading.hide();
+                    $scope.account = hoodieAccount;
+                    $ionicNavBarDelegate.back();
+                },
+                function() {
+                    $ionicLoading.hide();
+                    toaster.pop('failure', "Unable to signup at this time.  Please try again later.");
+                    $scope.account = hoodieAccount;
+                });
         };
 
     });

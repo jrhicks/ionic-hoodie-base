@@ -2,11 +2,11 @@
 
     <ion-content class="has-header">
 
-        <ion-nav-buttons side="right">
+        <ion-nav-buttons side="right" class="if-animate" ng-if="account.username == null">
             <a class="button" href="#welcome/account/signup">Sign Up!</a>
         </ion-nav-buttons>
 
-        <div class="card card-animate" ng-if="account.username != null">
+        <div class="card" ng-if="account.username != null">
             <div class="item item-divider">
                 Welcome
             </div>
@@ -21,7 +21,7 @@
             </label>
         </div>
 
-        <div class="card card-animate" ng-if="account.username == null">
+        <div class="card" ng-if="account.username == null">
             <div class="item item-divider">
                 Sign In
             </div>
