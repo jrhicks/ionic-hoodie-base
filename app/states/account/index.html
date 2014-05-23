@@ -2,12 +2,16 @@
 
     <ion-content class="has-header">
 
-        <div class="card card-animate" ng-if="username != null">
+        <ion-nav-buttons side="right">
+            <a class="button" href="#welcome/account/signup">Sign Up!</a>
+        </ion-nav-buttons>
+
+        <div class="card card-animate" ng-if="account.username != null">
             <div class="item item-divider">
                 Welcome
             </div>
             <div class="item item-text-wrap">
-                You are currently signed in as {{username}}
+                You are currently signed in as {{account.username}}
             </div>
 
             <label class="item">
@@ -17,12 +21,12 @@
             </label>
         </div>
 
-        <div class="card card-animate" ng-if="username == null">
+        <div class="card card-animate" ng-if="account.username == null">
             <div class="item item-divider">
                 Sign In
             </div>
             <div class="item item-text-wrap">
-                You can login to sync your todos with Hood.ie
+                Sign In to access your online todo items.
             </div>
 
             <label class="item item-input">

@@ -1,0 +1,11 @@
+.animate-card.ng-enter,
+.animate-card.ng-leave.ng-leave-active {
+    left: 500px;
+    transition: 300ms ease-in all;
+}
+.animate-card.ng-enter.ng-enter-active,
+.animate-card.ng-leave {
+    left: 0;
+    transition: 300ms ease-in all;
+}
+
