@@ -5,17 +5,11 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <title></title>
 
-    <!-- inject:html -->
-    <!-- any *.html files among your sources will go here as: <link rel="import" href="FILE"> -->
-    <!-- endinject -->
     <!-- bower:css -->
-    <!-- endbower -->
-
-    <!-- inject:css -->
-    <link rel="stylesheet" href="/css/card-animate.css">
-    <link rel="stylesheet" href="/css/ionic.app.css">
-    <link rel="stylesheet" href="/css/item-animate.css">
+    <link rel="stylesheet" href="/lib/ionic.css">
+    <link rel="stylesheet" href="/lib/toaster.css">
     <!-- endinject -->
+
 
 </head>
 
@@ -31,13 +25,11 @@
       Templates are in the /templates folder (but you could also
       have templates inline in this html file if you'd like).
     -->
+    <toaster-container toaster-options="{'position-class': 'toast-top-full-width'}"></toaster-container>
     <ion-nav-view animation="slide-left-right"></ion-nav-view>
 
 
     <!-- bower:js -->
-    <!-- endbower -->
-
-    <!-- inject:lib:js -->
     <script src="/lib/angular.js"></script>
     <script src="/lib/angular-animate.js"></script>
     <script src="/lib/angular-sanitize.js"></script>
@@ -48,7 +40,9 @@
     <script src="/lib/hoodie.js"></script>
     <script src="/lib/ngStorage.js"></script>
     <script src="/lib/hoodie.angularjs.js"></script>
+    <script src="/lib/toaster.js"></script>
     <!-- endinject -->
+
 
     <script src="/app.js"></script>
 
@@ -58,8 +52,6 @@
     <script src="/states/todos/todos_ctrl.js"></script>
     <script src="/states/welcome/welcome_ctrl.js"></script>
     <!-- endinject -->
-
-
 
     <script src="cordova.js"></script>
 

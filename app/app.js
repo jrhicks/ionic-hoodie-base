@@ -5,6 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 angular.module('app', ['ionic',
                        'hoodie',
+                       'toaster',
                        'ui.router',
                        'app.welcome_ctrl',
                        'app.todos_ctrl',

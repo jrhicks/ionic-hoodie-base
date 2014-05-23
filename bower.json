@@ -5,17 +5,17 @@
     "ionic": "v1.0.0-beta.5b",
     "hoodie": "~0.8.2",
     "ngstorage": "~0.3.0",
-    "hoodie-plugin-angularjs":"https://github.com/elmarburke/hoodie-plugin-angularjs.git"
+    "hoodie-plugin-angularjs": "https://github.com/elmarburke/hoodie-plugin-angularjs.git",
+    "AngularJS-Toaster": "~0.4.7"
   },
   "overrides": {
-      "hoodie-plugin-angularjs": {
-          "main": "./hoodie.angularjs.js"
-      },
-      "hoodie": {
-          "dependencies": {
-              "jquery-ajax-only":"1.10.2"
-          }
+    "hoodie-plugin-angularjs": {
+      "main": "./hoodie.angularjs.js"
+    },
+    "hoodie": {
+      "dependencies": {
+        "jquery-ajax-only": "1.10.2"
       }
-
+    }
   }
 }

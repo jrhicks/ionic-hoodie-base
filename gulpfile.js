@@ -31,7 +31,8 @@ var paths = {
     css: ['./app/css/**/*.css'],
     states_html: ['./app/states/**/*.html'],
     fonts: ['./bower_components/ionic/release/fonts/*.*'],
-    lib: wiredep().js
+    lib_js: wiredep().js,
+    lib_css: wiredep().css
 };
 
 /**
@@ -53,12 +54,12 @@ var beep_on_error = {
  * port 9000
  */
 
-var app_server = require('./tasks/app_server.js');
+var app_server = require('./tasks/api_proxy_server.js');
 
 gulp.task('default', ['app_scss', 'app_watch', 'app_serve', 'app_build']);
 
 gulp.task('app_serve', function() {
-    app_server.run();
+    app_server.run(9000, '/app');
 });
 
 gulp.task('app_scss', function(done) {
@@ -76,13 +77,16 @@ gulp.task('app_build', function(done) {
 //    var app_js = gulp.src(paths.app_js);
     var components_js = gulp.src(paths.components_js, {base: './app/compoonents'});
     var states_js = gulp.src(paths.states_js, { base: './app/states' });
-    var lib_js = gulp.src(paths.lib)
+    var lib_js = gulp.src(paths.lib_js)
         .pipe(gulp.dest('./app/lib'));
+    var lib_css = gulp.src(paths.lib_css)
+        .pipe(gulp.dest('./app/lib'));
+
     var css = gulp.src(paths.css);
     gulp.src('./app/index.html')
-        .pipe(inject(lib_js,
+        .pipe(inject(es.merge(lib_js, lib_css),
             {
-                starttag: '<!-- inject:lib:{{ext}} -->',
+                starttag: '<!-- bower:{{ext}} -->',
                 ignorePath: '/app'
             }))
         .pipe(inject(es.merge( states_js, components_js, css),
@@ -104,7 +108,7 @@ gulp.task('app_watch', function() {
  * and launches a server on port 9080
  */
 
-var www_server = require('./tasks/www_server.js');
+var www_server = require('./tasks/api_proxy_server.js');
 
 gulp.task('www', ['app_scss','www_watch','www_serve','www_build']);
 
@@ -150,6 +154,7 @@ gulp.task('www_build', function(done) {
     var lib_js = gulp.src(paths.lib)
         .pipe(concat("lib.js"))
         .pipe(filesize())
+        .pipe(ngmin())
         .pipe(uglify())
         .pipe(filesize())
         .pipe(gulp.dest("./www/js"))
@@ -171,7 +176,7 @@ gulp.task('www_build', function(done) {
 });
 
 gulp.task('www_serve', function() {
-    www_server.run();
+    www_server.run(9080, '/www');
 });
 
 gulp.task('www_watch', function() {
