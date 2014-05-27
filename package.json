@@ -13,7 +13,8 @@
     "express": "^4.3.0",
     "express-livereload": "0.0.24",
     "path": "^0.4.9",
-    "connect-slow": "^0.1.2"
+    "connect-slow": "^0.1.2",
+    "cordova": "^3.5.0-0.2.4"
   },
   "devDependencies": {
     "gulp": "^3.6.2",

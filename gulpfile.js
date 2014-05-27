@@ -32,7 +32,8 @@ var paths = {
     states_html: ['./app/states/**/*.html'],
     fonts: ['./bower_components/ionic/release/fonts/*.*'],
     lib_js: wiredep().js,
-    lib_css: wiredep().css
+    lib_css: wiredep().css,
+    images: ['./app/images/**/*.*']
 };
 
 /**
@@ -79,6 +80,7 @@ gulp.task('app_build', function(done) {
     var states_js = gulp.src(paths.states_js, { base: './app/states' });
     var lib_js = gulp.src(paths.lib_js)
         .pipe(gulp.dest('./app/lib'));
+    var app_js = gulp.src(paths.app_js);
     var lib_css = gulp.src(paths.lib_css)
         .pipe(gulp.dest('./app/lib'));
 
@@ -89,7 +91,7 @@ gulp.task('app_build', function(done) {
                 starttag: '<!-- bower:{{ext}} -->',
                 ignorePath: '/app'
             }))
-        .pipe(inject(es.merge( states_js, components_js, css),
+        .pipe(inject(es.merge( app_js, states_js, components_js, css),
             {
                 ignorePath: '/app'
             }))
@@ -134,35 +136,42 @@ gulp.task('www_build', function(done) {
         .pipe(concat("app.js"))
         .pipe(filesize())
         .pipe(ngmin())
-        .pipe(uglify())
+        .pipe(uglify({mangle: false}))
         .pipe(filesize())
         .pipe(gulp.dest("./www/js"))
     var components_js = gulp.src(paths.components_js)
         .pipe(concat("components.js"))
         .pipe(filesize())
         .pipe(ngmin())
-        .pipe(uglify())
+        .pipe(uglify({mangle: false}))
         .pipe(filesize())
         .pipe(gulp.dest("./www/js"))
     var states_js = gulp.src(paths.states_js)
         .pipe(concat("states.js"))
         .pipe(filesize())
         .pipe(ngmin())
-        .pipe(uglify())
+        .pipe(uglify({mangle: false}))
         .pipe(filesize())
         .pipe(gulp.dest("./www/js"))
-    var lib_js = gulp.src(paths.lib)
+    var lib_js = gulp.src(paths.lib_js)
         .pipe(concat("lib.js"))
         .pipe(filesize())
         .pipe(ngmin())
-        .pipe(uglify())
+        .pipe(uglify({mangle: false}))
         .pipe(filesize())
         .pipe(gulp.dest("./www/js"))
 
+    var lib_css = gulp.src(paths.lib_css)
+        .pipe(concat("lib.css"))
+        .pipe(gulp.dest('./www/css'));
+
+    var images = gulp.src(paths.images)
+        .pipe(gulp.dest('./www/images'));
+
     gulp.src('./app/index.html')
-        .pipe(inject(lib_js,
+        .pipe(inject(es.merge(lib_js, lib_css),
             {
-                starttag: '<!-- inject:lib:{{ext}} -->',
+                starttag: '<!-- bower:{{ext}} -->',
                 ignorePath: '/www'
             }))
         .pipe(inject(es.merge(app_js, states_js, components_js, css),
