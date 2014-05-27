@@ -1,0 +1,9 @@
+[submodule "couchdb_vm/apt"]
+	path = couchdb_vm/apt
+	url = https://github.com/opscode-cookbooks/apt
+[submodule "couchdb_vm/erlang"]
+	path = couchdb_vm/erlang
+	url = https://github.com/opscode-cookbooks/erlang.git
+[submodule "couchdb_vm/couchdb"]
+	path = couchdb_vm/couchdb
+	url = https://github.com/opscode-cookbooks/couchdb.git
